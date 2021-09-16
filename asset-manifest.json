@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/to-do-app/static/css/main.0385f92f.chunk.css",
+    "main.js": "/to-do-app/static/js/main.047f5654.chunk.js",
+    "main.js.map": "/to-do-app/static/js/main.047f5654.chunk.js.map",
+    "runtime-main.js": "/to-do-app/static/js/runtime-main.11694f58.js",
+    "runtime-main.js.map": "/to-do-app/static/js/runtime-main.11694f58.js.map",
+    "static/js/2.8edc405b.chunk.js": "/to-do-app/static/js/2.8edc405b.chunk.js",
+    "static/js/2.8edc405b.chunk.js.map": "/to-do-app/static/js/2.8edc405b.chunk.js.map",
+    "static/js/3.0069bbdc.chunk.js": "/to-do-app/static/js/3.0069bbdc.chunk.js",
+    "static/js/3.0069bbdc.chunk.js.map": "/to-do-app/static/js/3.0069bbdc.chunk.js.map",
+    "index.html": "/to-do-app/index.html",
+    "static/css/main.0385f92f.chunk.css.map": "/to-do-app/static/css/main.0385f92f.chunk.css.map",
+    "static/js/2.8edc405b.chunk.js.LICENSE.txt": "/to-do-app/static/js/2.8edc405b.chunk.js.LICENSE.txt",
+    "static/media/bg-desktop-dark.73e47dbb.jpg": "/to-do-app/static/media/bg-desktop-dark.73e47dbb.jpg",
+    "static/media/bg-desktop-light.3508d620.jpg": "/to-do-app/static/media/bg-desktop-light.3508d620.jpg",
+    "static/media/icon-check.a8fb15d0.svg": "/to-do-app/static/media/icon-check.a8fb15d0.svg",
+    "static/media/icon-cross.6ee81d30.svg": "/to-do-app/static/media/icon-cross.6ee81d30.svg",
+    "static/media/icon-drag.41116b78.svg": "/to-do-app/static/media/icon-drag.41116b78.svg",
+    "static/media/icon-moon.6c03114b.svg": "/to-do-app/static/media/icon-moon.6c03114b.svg",
+    "static/media/icon-sun.910b1f9a.svg": "/to-do-app/static/media/icon-sun.910b1f9a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.11694f58.js",
+    "static/js/2.8edc405b.chunk.js",
+    "static/css/main.0385f92f.chunk.css",
+    "static/js/main.047f5654.chunk.js"
+  ]
+}
