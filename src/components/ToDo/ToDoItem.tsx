@@ -57,6 +57,7 @@ export const ButtonDelete = styled.button`
     width: 12px;
     height: 12px;
     background-size: 12px;
+    margin-top: 5px;
   }
 `;
 
