@@ -3,6 +3,7 @@ import iconX from "../../images/icon-cross.svg?url";
 import iconDrag from "../../images/icon-drag.svg?url";
 import { Li } from "../Global";
 import { RoundCheckbox } from "./RoundCheckbox";
+import { DragEvent } from "react";
 
 export interface ToDoItemProps {
   name: string;
@@ -89,12 +90,12 @@ export const ToDoItem = (props: {
       ></ButtonDelete>
       <DivDrag
         draggable={true}
-        onDragStart={(e) => props.onDragStart(e, props.index)}
-        onDragEnter={(e) => props.onDragEnter(e, props.index)}
-        onDragOver={(e) => props.onDragOver(e, props.index)}
-        onDragLeave={(e) => props.onDragLeave(e, props.index)}
-        onDrop={(e) => props.onDrop(e, props.index)}
-        onDragEnd={(e) => props.onDragEnd(e)}
+        onDragStart={(e: DragEvent<HTMLElement>) => props.onDragStart(e, props.index)}
+        onDragEnter={(e: DragEvent<HTMLElement>) => props.onDragEnter(e, props.index)}
+        onDragOver={(e: DragEvent<HTMLElement>) => props.onDragOver(e, props.index)}
+        onDragLeave={(e: DragEvent<HTMLElement>) => props.onDragLeave(e, props.index)}
+        onDrop={(e: DragEvent<HTMLElement>) => props.onDrop(e, props.index)}
+        onDragEnd={(e: DragEvent<HTMLElement>) => props.onDragEnd(e)}
       ></DivDrag>
     </Li>
   );
