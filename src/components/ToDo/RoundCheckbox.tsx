@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { font, gradient } from "../../styles/StyleTokens";
-import iconCheck from "../../images/icon-check.svg";
+import iconCheck from "../../images/icon-check.svg?url";
 import { ToDoItemProps } from "./ToDoItem";
 
 export const LabelRound = styled.label`
@@ -49,7 +49,7 @@ export const InputCheckBox = styled.input.attrs({ type: "checkbox" })`
   }
   &:checked + ${LabelRound}::before {
     background: ${gradient.bluePurple};
-    background-image: url(${iconCheck}), ${gradient.bluePurple};
+    background-image: url("${iconCheck}"), ${gradient.bluePurple};
     background-repeat: no-repeat;
     background-position: 54% 53%;
     border: 1px solid ${(props) => props.theme.backgroundColorContainer};

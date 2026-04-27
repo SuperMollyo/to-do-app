@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import iconX from "../../images/icon-cross.svg";
-import iconDrag from "../../images/icon-drag.svg";
+import iconX from "../../images/icon-cross.svg?url";
+import iconDrag from "../../images/icon-drag.svg?url";
 import { Li } from "../Global";
 import { RoundCheckbox } from "./RoundCheckbox";
 
@@ -16,7 +16,7 @@ export const DivDrag = styled.div`
   background-color: ${(props) => props.theme.backgroundColorContainer};
   cursor: grab;
   transition: 0.5s;
-  background-image: url(${iconDrag});
+  background-image: url("${iconDrag}");
   background-repeat: no-repeat;
   width: 36px;
   height: 36px;
@@ -44,7 +44,7 @@ export const ButtonDelete = styled.button`
   background: none;
   cursor: pointer;
   transition: 0.5s;
-  background-image: url(${iconX});
+  background-image: url("${iconX}");
   background-repeat: no-repeat;
   background-position: center;
   width: 26px;

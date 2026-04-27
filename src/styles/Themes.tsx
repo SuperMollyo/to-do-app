@@ -2,10 +2,10 @@ import { color } from "./StyleTokens";
 import { DefaultTheme } from "styled-components";
 import bgLightDesktop from "../images/bg-desktop-light.jpg";
 import bgLightMobile from "../images/bg-mobile-light.jpg";
-import iconLight from "../images/icon-sun.svg";
+import iconLight from "../images/icon-sun.svg?url";
 import bgDarkDesktop from "../images/bg-desktop-dark.jpg";
 import bgDarkMobile from "../images/bg-mobile-dark.jpg";
-import iconDark from "../images/icon-moon.svg";
+import iconDark from "../images/icon-moon.svg?url";
 
 export const lightTheme: DefaultTheme = {
   backgroundColorBody: color.veryLightGray,
@@ -17,7 +17,7 @@ export const lightTheme: DefaultTheme = {
   backgroundImgDesktop: `url(${bgLightDesktop})`,
   backgroundImgMobile: `url(${bgLightMobile})`,
   borderColor: color.veryLightGrayishBlue,
-  iconImg: `url(${iconLight})`,
+  iconImg: `url("${iconLight}")`,
   dropShadow: `0px 35px 50px -15px rgba(194, 195, 214, 0.5)`,
 };
 
@@ -33,6 +33,6 @@ export const darkTheme: DefaultTheme = {
   backgroundImgDesktop: `url(${bgDarkDesktop})`,
   backgroundImgMobile: `url(${bgDarkMobile})`,
   borderColor: color.veryDarkGrayishBlueAlt2,
-  iconImg: `url(${iconDark})`,
+  iconImg: `url("${iconDark}")`,
   dropShadow: `none`,
 };
