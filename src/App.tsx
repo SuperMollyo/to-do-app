@@ -19,6 +19,21 @@ import { FilterButton } from "./components/ToDo/FilterButton";
 import { nanoid } from "nanoid";
 import { color } from "./styles/StyleTokens";
 
+ const INITIAL_ITEMS = {
+    toDoItems: [
+      {
+        id: "todo-0",
+        name: "Eat",
+        isComplete: true,
+      },
+      {
+        id: "todo-1",
+        name: "Sleep",
+        isComplete: false,
+      },
+    ],
+  };
+
 export const FILTER_MAP: any = {
   All: () => true,
   Active: (items: ToDoItemProps) => items.isComplete !== true,
@@ -55,21 +70,8 @@ function App() {
     setItems(updatedItems);
   };
 
-  const DATA = {
-    toDoItems: [
-      {
-        id: "todo-0",
-        name: "Eat",
-        isComplete: true,
-      },
-      {
-        id: "todo-1",
-        name: "Sleep",
-        isComplete: false,
-      },
-    ],
-  };
-  const [items, setItems] = useState(DATA.toDoItems);
+ 
+  const [items, setItems] = useState(INITIAL_ITEMS.toDoItems);
   const [filter, setFilter] = useState("All");
   const countItemsLeft = () => {
     let count = 0;
