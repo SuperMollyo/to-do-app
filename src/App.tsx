@@ -49,14 +49,7 @@ function App() {
   };
   const toggleIsComplete = (id: string) => {
     const updatedItems = items.map((item) => {
-      console.log(
-        "item: " +
-          item.name +
-          "id: " +
-          item.id +
-          " isComplete: " +
-          item.isComplete
-      );
+   
       if (id === item.id) {
         if (item.isComplete === true) {
           setItemsLeftCount(itemsLeftCount + 1);
@@ -93,18 +86,14 @@ function App() {
   );
 
   const onDragStart = (e: React.DragEvent<HTMLElement>, index: number) => {
-    console.log("onDragStart");
     e.dataTransfer.effectAllowed = "move";
 
     setDraggedItem(items[index]);
-    if (draggedItem !== undefined)
-      console.log("draggedItem index: " + draggedItem.name);
     (e.target as HTMLElement).style.cursor = "grabbing";
     if ((e.target as HTMLElement).parentElement !== null) {
       const parent = (e.target as HTMLElement).parentElement;
       if (parent !== null) {
         const id = parent.id;
-        console.log("name: " + parent);
         e.dataTransfer.setData("text/html", id);
         e.dataTransfer.setDragImage(parent, 20, 20);
       }
@@ -121,7 +110,6 @@ function App() {
     }
   };
   const onDragEnter = (e: React.DragEvent<HTMLElement>, index: number) => {
-    console.log("onDragEnter");
     (e.target as HTMLElement).style.outline = `dotted 1px ${color.brightBlue}`;
     if ((e.target as HTMLElement).parentElement !== null) {
       const parent = (e.target as HTMLElement).parentElement;
@@ -130,7 +118,6 @@ function App() {
     }
   };
   const onDragLeave = (e: React.DragEvent<HTMLElement>, index: number) => {
-    console.log("onDragLeave");
     (e.target as HTMLElement).style.outline = "none";
     if ((e.target as HTMLElement).parentElement !== null) {
       const parent = (e.target as HTMLElement).parentElement;
@@ -157,7 +144,6 @@ function App() {
 
     setItems(newItems);
     // setDraggedItem(null);
-    console.log("onDragEnd0000");
     // event.preventDefault();
   };
   const onDragEnd = (e: React.DragEvent<HTMLElement>) => {
@@ -173,7 +159,6 @@ function App() {
     setItemsLeftCount(itemsLeftCount + 1);
   };
   const deleteItem = (id: string, isComplete: boolean) => {
-    console.log("delete");
     const updatedItems = items.filter((items) => id !== items.id);
     setItems(updatedItems);
     if (!isComplete) decrementItemsLeft();
