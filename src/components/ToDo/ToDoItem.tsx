@@ -3,7 +3,7 @@ import iconX from "../../images/icon-cross.svg?url";
 import iconDrag from "../../images/icon-drag.svg?url";
 import { Li } from "../Global";
 import { RoundCheckbox } from "./RoundCheckbox";
-import { DragEvent } from "react";
+import { DragEvent, memo } from "react";
 
 export interface ToDoItemProps {
   name: string;
@@ -62,7 +62,7 @@ export const ButtonDelete = styled.button`
   }
 `;
 
-export const ToDoItem = (props: {
+export const ToDoItem = memo((props: {
   toDoItem: ToDoItemProps;
   toggleIsComplete: (id: string) => void;
   deleteItem: (id: string) => void;
@@ -99,4 +99,4 @@ export const ToDoItem = (props: {
       />
     </Li>
   );
-};
+})

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./styles/Themes";
 import {
@@ -39,39 +39,35 @@ export const FILTER_MAP: Record<string, (item: ToDoItemProps) => boolean> = {
   Active: (items: ToDoItemProps) => items.isComplete !== true,
   Completed: (items: ToDoItemProps) => items.isComplete !== false,
 };
+
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App() {
   const [theme, setTheme] = useState("light");
-
-  const themeToggler = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
-
-  const toggleIsComplete = (id: string) => {
-    const updatedItems = items.map((item) => {
-   
-      if (id === item.id) {
-        return { ...item, isComplete: !item.isComplete };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
- 
   const [items, setItems] = useState(INITIAL_ITEMS.toDoItems);
   const [filter, setFilter] = useState("All");
 
+  const themeToggler = useCallback(() => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }, []);
+
+  const toggleIsComplete = useCallback((id: string) => {
+    setItems(prev => prev.map(item => 
+      item.id === id ? { ...item, isComplete: !item.isComplete } : item
+    ));
+  }, []);
+
+
   const itemsLeftCount = items.filter((item) => !item.isComplete).length;
-  const [draggedItem, setDraggedItem] = useState<ToDoItemProps | undefined>(
-    undefined
-  );
 
-  const onDragStart = (e: React.DragEvent<HTMLElement>, index: number) => {
+  const draggedItemRef = useRef<ToDoItemProps | undefined>(undefined); 
+
+  const onDragStart = useCallback((e: React.DragEvent<HTMLElement>, index: number) => {
     e.dataTransfer.effectAllowed = "move";
-
-    setDraggedItem(items[index]);
+    setItems(prev => {
+      draggedItemRef.current = prev[index];
+      return prev; // return unchanged items
+    });
     (e.target as HTMLElement).style.cursor = "grabbing";
     if ((e.target as HTMLElement).parentElement !== null) {
       const parent = (e.target as HTMLElement).parentElement;
@@ -80,70 +76,84 @@ function App() {
         e.dataTransfer.setDragImage(parent, 20, 20);
       }
     }
-  };
+  }, []); 
 
-  const onDragOver = (e: React.DragEvent<HTMLElement>, index: number) => {
+  const onDragOver = useCallback((e: React.DragEvent<HTMLElement>, index: number) => {
     e.preventDefault();
-    const draggedOverItem = items[index];
+    setItems(prevItems => {
+      const draggedOverItem = prevItems[index];
 
-    // if the item is dragged over itself, ignore
-    if (draggedItem === draggedOverItem) {
-      return;
-    }
-  };
-  const onDragEnter = (e: React.DragEvent<HTMLElement>, index: number) => {
+      // if the item is dragged over itself, ignore
+      if (draggedItemRef.current === draggedOverItem) {
+        return prevItems;
+      }
+      return prevItems;
+    });
+  }, []);
+
+  const onDragEnter = useCallback((e: React.DragEvent<HTMLElement>, index: number) => {
     (e.target as HTMLElement).style.outline = `dotted 1px ${color.brightBlue}`;
     if ((e.target as HTMLElement).parentElement !== null) {
       const parent = (e.target as HTMLElement).parentElement;
       if (parent !== null)
         parent.style.outline = `dotted 1px ${color.brightBlue}`;
     }
-  };
-  const onDragLeave = (e: React.DragEvent<HTMLElement>, index: number) => {
+  }, []);
+
+  const onDragLeave = useCallback((e: React.DragEvent<HTMLElement>, index: number) => {
     (e.target as HTMLElement).style.outline = "none";
     if ((e.target as HTMLElement).parentElement !== null) {
       const parent = (e.target as HTMLElement).parentElement;
       if (parent !== null) parent.style.outline = "none";
     }
-  };
-  const onDrop = (e: React.DragEvent<HTMLElement>, index: number) => {
-    const draggedOverItem = items[index];
+  }, []);
+
+  const onDrop = useCallback((e: React.DragEvent<HTMLElement>, index: number) => {
     (e.target as HTMLElement).style.outline = "none";
     if ((e.target as HTMLElement).parentElement !== null) {
       const parent = (e.target as HTMLElement).parentElement;
       if (parent !== null) parent.style.outline = "none";
     }
-    // if the item is dragged over itself, ignore
-    if (draggedItem === draggedOverItem) {
-      return;
-    }
 
-    // filter out the currently dragged item
-    let newItems = items.filter((item) => item !== draggedItem);
+    setItems(prevItems => {
+      const draggedOverItem = prevItems[index];
+      // if the item is dragged over itself, ignore
+      if (draggedItemRef.current === draggedOverItem) {
+        return prevItems;
+      }
 
-    // add the dragged item after the dragged over item
-    if (draggedItem !== undefined) newItems.splice(index, 0, draggedItem);
+      // filter out the currently dragged item
+      let newItems = prevItems.filter((item) => item !== draggedItemRef.current);
 
-    setItems(newItems);
-  };
-  const onDragEnd = (e: React.DragEvent<HTMLElement>) => {
+      // add the dragged item after the dragged over item
+      if (draggedItemRef.current !== undefined) newItems.splice(index, 0, draggedItemRef.current);
+
+      return newItems; 
+    });
+  }, []);
+
+  const onDragEnd = useCallback((e: React.DragEvent<HTMLElement>) => {
     (e.target as HTMLElement).style.cursor = "grab";
-  };
-  const addItem = (name: string) => {
+  }, []);
+
+  const addItem = useCallback((name: string) => {
     const newItem: ToDoItemProps = {
       id: "todo-" + nanoid(),
       name: name,
       isComplete: false,
     };
     setItems((prev) => [...prev, newItem]);
-  };
-  const deleteItem = (id: string) => {
+  }, [])
+
+  const deleteItem = useCallback((id: string) => {
     setItems((prev) => prev.filter((item) => item.id !== id));
-  };
-  const clearCompletedItems = () => {
+  }, []);
+
+  const clearCompletedItems = useCallback(() => {
    setItems((prev) => prev.filter((item) => !item.isComplete));
-  };
-  const toDoList = items
+  }, []);
+
+  const toDoList = useMemo(() => items
     .filter(FILTER_MAP[filter])
     .map((toDoItem: ToDoItemProps, index: number) => (
       <ToDoItem
@@ -159,15 +169,17 @@ function App() {
         onDrop={onDrop}
         onDragEnd={onDragEnd}
       />
-    ));
-  const filterButtonList = FILTER_NAMES.map((name) => (
+    )), [items, filter, toggleIsComplete, deleteItem]);
+
+  const filterButtonList = useMemo(() => FILTER_NAMES.map((name) => (
     <FilterButton
       key={name}
       name={name}
       isPressed={name === filter}
       filterItems={setFilter}
     />
-  ));
+  )), [filter]);
+
   return (
     <div className="App">
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
