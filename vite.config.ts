@@ -7,4 +7,5 @@ export default defineConfig({
     tsconfigPaths: true
 },
   plugins: [react(), svgr({include: "**/*.svg?react"})],
+  base: '/to-do-app/',
 });
