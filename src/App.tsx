@@ -45,8 +45,9 @@ function App() {
   const [theme, setTheme] = useState("light");
 
   const themeToggler = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
+
   const toggleIsComplete = (id: string) => {
     const updatedItems = items.map((item) => {
    
