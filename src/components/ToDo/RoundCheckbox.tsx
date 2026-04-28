@@ -16,7 +16,7 @@ export const InputCheckBox = styled.input.attrs({ type: "checkbox" })`
   height: 0px;
   width: 0px;
   overflow: hidden;
-  clip: rect(1px 1px 1px 1px);
+  clip-path: inset(50%);
   margin: 0;
   & + ${LabelRound}::before {
     content: "";
