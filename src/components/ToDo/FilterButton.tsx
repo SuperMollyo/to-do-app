@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styled from "styled-components";
 import { font, color } from "../../styles/StyleTokens";
 export const ButtonFilterAction = styled.button`
@@ -20,7 +21,7 @@ interface FilterButtonProps {
   isPressed: boolean;
   filterItems: (name: string) => void;
 }
-export const FilterButton = (props: FilterButtonProps) => {
+export const FilterButton = memo((props: FilterButtonProps) => {
   return (
     <ButtonFilterAction
       type="button"
@@ -30,4 +31,4 @@ export const FilterButton = (props: FilterButtonProps) => {
       {props.name}
     </ButtonFilterAction>
   );
-};
+});

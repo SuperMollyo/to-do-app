@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 import { borderRadius, color, font } from "../../styles/StyleTokens";
 
@@ -78,7 +78,7 @@ export interface ToDoFormProps {
   addToDoItem: (name: string) => void;
 }
 
-export const ToDoForm = (props: ToDoFormProps) => {
+export const ToDoForm = memo((props: ToDoFormProps) => {
   const placeholderText: string = "Create a new todo...";
   const [name, setName] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,4 +106,4 @@ export const ToDoForm = (props: ToDoFormProps) => {
       </InputContainer>
     </form>
   );
-};
+});
