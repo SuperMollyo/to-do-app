@@ -51,11 +51,6 @@ function App() {
     const updatedItems = items.map((item) => {
    
       if (id === item.id) {
-        if (item.isComplete === true) {
-          setItemsLeftCount(itemsLeftCount + 1);
-        } else {
-          decrementItemsLeft();
-        }
         return { ...item, isComplete: !item.isComplete };
       }
       return item;
@@ -75,12 +70,8 @@ function App() {
     });
     return count;
   };
-  const decrementItemsLeft = () => {
-    if (itemsLeftCount !== 0) {
-      setItemsLeftCount(itemsLeftCount - 1);
-    }
-  };
-  const [itemsLeftCount, setItemsLeftCount] = useState(countItemsLeft);
+
+  const itemsLeftCount = items.filter((item) => !item.isComplete).length;
   const [draggedItem, setDraggedItem] = useState<ToDoItemProps | undefined>(
     undefined
   );
@@ -155,18 +146,13 @@ function App() {
       name: name,
       isComplete: false,
     };
-    setItems([...items, newItem]);
-    setItemsLeftCount(itemsLeftCount + 1);
+    setItems((prev) => [...prev, newItem]);
   };
-  const deleteItem = (id: string, isComplete: boolean) => {
-    const updatedItems = items.filter((items) => id !== items.id);
-    setItems(updatedItems);
-    if (!isComplete) decrementItemsLeft();
+  const deleteItem = (id: string) => {
+    setItems((prev) => prev.filter((item) => item.id !== id));
   };
   const clearCompletedItems = () => {
-    const updatedItems = items.filter((items) => items.isComplete === false);
-    setItems(updatedItems);
-    setItemsLeftCount(updatedItems.length);
+   setItems((prev) => prev.filter((item) => !item.isComplete));
   };
   const toDoList = items
     .filter(FILTER_MAP[filter])
