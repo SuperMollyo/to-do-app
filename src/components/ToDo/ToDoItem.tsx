@@ -65,7 +65,7 @@ export const ButtonDelete = styled.button`
 export const ToDoItem = (props: {
   toDoItem: ToDoItemProps;
   toggleIsComplete: (id: string) => void;
-  deleteItem: (id: string, isComplete: boolean) => void;
+  deleteItem: (id: string) => void;
   onDragStart: (e: React.DragEvent<HTMLElement>, index: number) => void;
   onDragEnter: (e: React.DragEvent<HTMLElement>, index: number) => void;
   onDragOver: (e: React.DragEvent<HTMLElement>, index: number) => void;
@@ -84,10 +84,10 @@ export const ToDoItem = (props: {
       <ButtonDelete
         type="button"
         onClick={() =>
-          props.deleteItem(props.toDoItem.id, props.toDoItem.isComplete)
+          props.deleteItem(props.toDoItem.id)
         }
         aria-label="Delete Item"
-      ></ButtonDelete>
+      />
       <DivDrag
         draggable={true}
         onDragStart={(e: DragEvent<HTMLElement>) => props.onDragStart(e, props.index)}
@@ -96,7 +96,7 @@ export const ToDoItem = (props: {
         onDragLeave={(e: DragEvent<HTMLElement>) => props.onDragLeave(e, props.index)}
         onDrop={(e: DragEvent<HTMLElement>) => props.onDrop(e, props.index)}
         onDragEnd={(e: DragEvent<HTMLElement>) => props.onDragEnd(e)}
-      ></DivDrag>
+      />
     </Li>
   );
 };

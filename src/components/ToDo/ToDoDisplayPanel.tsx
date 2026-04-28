@@ -41,11 +41,13 @@ export const DivFilter = styled.div`
   }
 `;
 
-export const ToDoDisplayPanel = (props: {
+interface ToDoDisplayPanelProps {
   filterButtonList: JSX.Element[];
   itemsLeft: number;
   clearAllItems: () => void;
-}) => {
+}
+
+export const ToDoDisplayPanel = (props: ToDoDisplayPanelProps) => {
   const itemString = props.itemsLeft !== 1 ? "items" : "item";
 
   return (
@@ -54,7 +56,7 @@ export const ToDoDisplayPanel = (props: {
         <p>
           {props.itemsLeft} {itemString} left
         </p>
-        <ButtonClear type="button" onClick={() => props.clearAllItems()}>
+        <ButtonClear type="button" onClick={props.clearAllItems}>
           Clear Completed
         </ButtonClear>
       </RowSpaceBetween>

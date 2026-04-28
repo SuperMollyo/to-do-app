@@ -34,7 +34,7 @@ import { color } from "./styles/StyleTokens";
     ],
   };
 
-export const FILTER_MAP: any = {
+export const FILTER_MAP: Record<string, (item: ToDoItemProps) => boolean> = {
   All: () => true,
   Active: (items: ToDoItemProps) => items.isComplete !== true,
   Completed: (items: ToDoItemProps) => items.isComplete !== false,
@@ -62,15 +62,6 @@ function App() {
  
   const [items, setItems] = useState(INITIAL_ITEMS.toDoItems);
   const [filter, setFilter] = useState("All");
-  const countItemsLeft = () => {
-    let count = 0;
-    items.forEach((item) => {
-      if (item.isComplete === false) {
-        count++;
-      }
-    });
-    return count;
-  };
 
   const itemsLeftCount = items.filter((item) => !item.isComplete).length;
   const [draggedItem, setDraggedItem] = useState<ToDoItemProps | undefined>(
@@ -85,8 +76,7 @@ function App() {
     if ((e.target as HTMLElement).parentElement !== null) {
       const parent = (e.target as HTMLElement).parentElement;
       if (parent !== null) {
-        const id = parent.id;
-        e.dataTransfer.setData("text/html", id);
+        e.dataTransfer.setData("text/html", parent.id);
         e.dataTransfer.setDragImage(parent, 20, 20);
       }
     }
@@ -135,8 +125,6 @@ function App() {
     if (draggedItem !== undefined) newItems.splice(index, 0, draggedItem);
 
     setItems(newItems);
-    // setDraggedItem(null);
-    // event.preventDefault();
   };
   const onDragEnd = (e: React.DragEvent<HTMLElement>) => {
     (e.target as HTMLElement).style.cursor = "grab";
@@ -191,16 +179,16 @@ function App() {
               <RowSpaceBetween>
                 <H1>ToDo</H1>
                 <ButtonThemeToggle
-                  onClick={() => themeToggler()}
+                  onClick={themeToggler}
                   aria-label="ToggleTheme Color"
-                ></ButtonThemeToggle>
+                />
               </RowSpaceBetween>
             </Container>
           </Header>
           <Container>
-            <ToDoForm addToDoItem={addItem}></ToDoForm>
+            <ToDoForm addToDoItem={addItem}/>
             <ToDoMain
-              ToDoItem={toDoList}
+              toDoItem={toDoList}
               filterButtonList={filterButtonList}
               itemsLeft={itemsLeftCount}
               clearAllItems={clearCompletedItems}

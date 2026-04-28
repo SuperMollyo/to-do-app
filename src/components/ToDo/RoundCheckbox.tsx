@@ -69,16 +69,18 @@ export const InputCheckBox = styled.input.attrs({ type: "checkbox" })`
     box-shadow: 0 0 3px 2px #5e9ed6;
   }
 `;
-export const RoundCheckbox = (props: {
+
+interface RoundCheckboxProps {
   toDoItem: ToDoItemProps;
   toggleFunction: (id: string) => void;
-}) => {
+}
+
+export const RoundCheckbox = (props: RoundCheckboxProps) => {
   return (
     <div>
       <InputCheckBox
-        type="checkbox"
         id={props.toDoItem.id}
-        defaultChecked={props.toDoItem.isComplete}
+        checked={props.toDoItem.isComplete}
         onChange={() => props.toggleFunction(props.toDoItem.id)}
       />
       <LabelRound htmlFor={props.toDoItem.id}>{props.toDoItem.name}</LabelRound>

@@ -11,7 +11,7 @@ export const ContainerToDo = styled.div`
   box-shadow: ${(props) => props.theme.dropShadow};
 `;
 export interface ToDoProps {
-  ToDoItem: React.ReactNode;
+  toDoItem: React.ReactNode;
   filterButtonList: JSX.Element[];
   itemsLeft: number;
   clearAllItems: () => void;
@@ -20,7 +20,7 @@ export interface ToDoProps {
 export const ToDoMain = (props: ToDoProps) => {
   return (
     <ContainerToDo>
-      <Ul role="list">{props.ToDoItem}</Ul>
+      <Ul role="list">{props.toDoItem}</Ul>
       <ToDoDisplayPanel
         filterButtonList={props.filterButtonList}
         itemsLeft={props.itemsLeft}

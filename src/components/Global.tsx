@@ -1,8 +1,8 @@
-import styled, { DefaultTheme } from "styled-components";
+import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import { borderRadius, font } from "../styles/StyleTokens";
 
-export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
+export const GlobalStyle = createGlobalStyle`
 	body {
         font-family: ${font.family.default}, sans-serif;
         font-size: ${font.size.default};
