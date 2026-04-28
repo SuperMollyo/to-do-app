@@ -75,4 +75,4 @@ and a light/dark theme toggle.
    yarn start
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [http://localhost:5173](http://localhost:5173) in your browser
