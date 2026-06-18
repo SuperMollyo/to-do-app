@@ -1,6 +1,6 @@
 # To-Do List Web App
 
-A responsive to-do app built with React, TypeScript, and Styled Components 
+A responsive to-do app built with React, TypeScript, and Styled Components
 as part of a Frontend Mentor intermediate coding challenge.
 
 🔗 **[Live Demo](https://supermollyo.github.io/to-do-app/)**
@@ -8,10 +8,10 @@ as part of a Frontend Mentor intermediate coding challenge.
 
 ## Overview
 
-Built to match the design mocks and requirements from the 
-[Frontend Mentor Todo App Challenge](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW) 
-(Intermediate level), while adding my own enhancements — including 
-drag-and-drop reordering built from scratch, accessibility improvements, 
+Built to match the design mocks and requirements from the
+[Frontend Mentor Todo App Challenge](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW)
+(Intermediate level), while adding my own enhancements — including
+drag-and-drop reordering built from scratch, accessibility improvements,
 and a light/dark theme toggle.
 
 ## Features
@@ -28,15 +28,19 @@ and a light/dark theme toggle.
 
 ## What I Added Beyond the Challenge
 
-- Built drag-and-drop reordering from scratch without an external 
+- Built drag-and-drop reordering from scratch without an external
   library — intentional choice to tackle the implementation myself
-- Custom CSS checkbox using pseudo-elements with gradient border 
+- Custom CSS checkbox using pseudo-elements with gradient border
   hover effect
-- ARIA attributes throughout for accessibility (`aria-pressed` on 
-  filter buttons, `role="list"`, visually hidden checkbox with 
+- ARIA attributes throughout for accessibility (`aria-pressed` on
+  filter buttons, `role="list"`, visually hidden checkbox with
   keyboard focus state)
 - Smooth light/dark theme transition
 - Swapped sun/moon button placement for improved UX
+
+## What I Would Work On Next (Beyond the Challenge)
+
+- Adjust the design's coloring because it doesn't currently pass WCAG contrast rules
 
 ## Tech Stack
 
@@ -55,24 +59,28 @@ and a light/dark theme toggle.
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js
 - Yarn
 
 ### Installation
 
 1. Clone the repo
+
 ```bash
    git clone https://github.com/SuperMollyo/to-do-app.git
 ```
 
-2. Install dependencies
+1. Install dependencies
+
 ```bash
    yarn install
 ```
 
-3. Run the development server
+1. Run the development server
+
 ```bash
    yarn start
 ```
 
-4. Open [http://localhost:5173](http://localhost:5173) in your browser
+1. Open [http://localhost:5173](http://localhost:5173) in your browser
