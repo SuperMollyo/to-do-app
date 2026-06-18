@@ -74,12 +74,25 @@ export const InputTextBox = styled.input.attrs({ type: "text" })`
     padding-left: 50px;
   }
 `;
+
+const HiddenSubmitButton = styled.button.attrs({ type: 'submit' })`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+`;
+
 export interface ToDoFormProps {
   addToDoItem: (name: string) => void;
 }
 
 export const ToDoForm = memo((props: ToDoFormProps) => {
-  const placeholderText: string = "Create a new todo...";
+  const placeholderText: string = "e.g. Email Molly...";
   const [name, setName] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -95,15 +108,17 @@ export const ToDoForm = memo((props: ToDoFormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <InputContainer>
-        <CircleIcon></CircleIcon>
+        <CircleIcon/>
         <InputTextBox
           type="text"
+          aria-label="Create a new todo"
           className="input"
           value={name}
           placeholder={placeholderText}
           onChange={handleChange}
         />
       </InputContainer>
+      <HiddenSubmitButton>Add item</HiddenSubmitButton>
     </form>
   );
 });
